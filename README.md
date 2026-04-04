@@ -14,9 +14,9 @@ chezmoi init --apply https://gitlab.com/jason/dotfiles
 
 ## What's Included
 
-- **zsh** + zinit plugin manager (autosuggestions, syntax highlighting, fzf-tab)
-- **tmux** + TPM with Catppuccin Mocha theme and `Ctrl+Space` prefix
-- **Neovim** + LazyVim with LSPs for Python, TypeScript, Terraform, YAML
+- **zsh** + standard completion (autosuggestions, syntax highlighting)
+- **tmux** + minimal TPM with Gruvbox Dark theme and `Ctrl+b` prefix (default)
+- **Neovim** + LazyVim with gruvbox.nvim theme and LSPs for Python, TypeScript, Terraform, YAML
 - **Starship** prompt with git and Kubernetes context
 - **Alacritty** terminal config (Windows-side, targets WSL2)
 - **git** config with delta diff pager and lazygit

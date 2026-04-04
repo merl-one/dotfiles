@@ -276,25 +276,22 @@ tmux new -s dev
 # Format: [0] editor  [1] server  [2] logs | tmux session: dev
 
 # 2. You're in window 0 (editor). Create more windows:
-Ctrl+Space  c    # c = create new window
+Ctrl+b  c    # c = create new window
 
 # Now you have windows 0 and 1
 
 # 3. Switch between windows
-Ctrl+Space  0    # Go to window 0
-Ctrl+Space  1    # Go to window 1
-Ctrl+Space  n    # Next window
-Ctrl+Space  p    # Previous window
+Ctrl+b  0    # Go to window 0
+Ctrl+b  1    # Go to window 1
+Ctrl+b  n    # Next window
+Ctrl+b  p    # Previous window
 
 # 4. Split current window into panes (left/right)
-Ctrl+Space  %    # Split vertical
-Ctrl+Space  "    # Split horizontal
+Ctrl+b  %    # Split vertical
+Ctrl+b  "    # Split horizontal
 
 # 5. Move between panes
-Ctrl+Space  Ctrl+h   # Left pane
-Ctrl+Space  Ctrl+j   # Down pane
-Ctrl+Space  Ctrl+k   # Up pane
-Ctrl+Space  Ctrl+l   # Right pane
+Ctrl+b  arrow keys   # Navigate panes (left/down/up/right)
 
 # Real example - Development setup:
 # Window 0: Editor (nvim)

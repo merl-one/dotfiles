@@ -23,21 +23,21 @@ Complete bootstrap and usage guide for WSL2 Linux development environment manage
    - Should see the Starship prompt (warm colors on dark background with Gruvbox Dark theme)
 
 2. **Verify everything works**
-   ```bash
-   zsh --version          # Should show 5.x
-   nvim --version         # Should show v0.12+
-   kubectl get nodes      # Should show 4 cluster nodes
-   ?? what is kubectl     # Should return AI explanation via Fabric
-   ```
+    ```bash
+    zsh --version          # Should show 5.x
+    nvim --version         # Should show v0.12+
+    kubectl get nodes      # Should show 4 cluster nodes
+    ?? what is kubectl     # Should return AI explanation via Fabric
+    ```
 
 3. **Update plugins & packages (optional, runs daily)**
-   ```bash
-   # In zsh, press Ctrl+Space then p (tmux shortcut to list plugins)
-   # Or run manually:
-   chezmoi update         # Sync latest dotfiles changes
-   nvim "+Lazy update"    # Update Neovim plugins
-   tmux list-plugins      # View installed tmux plugins
-   ```
+    ```bash
+    # In tmux, press Ctrl+b then ? (tmux shortcut to list keybindings)
+    # Or run manually:
+    chezmoi update         # Sync latest dotfiles changes
+    nvim "+Lazy update"    # Update Neovim plugins
+    tmux list-plugins      # View installed tmux plugins
+    ```
 
 ### Keyboard Shortcuts Quick Reference
 
@@ -209,15 +209,14 @@ tmux new -s work     # Create session named "work"
 tmux attach -t work  # Attach to "work" session
 tmux list-sessions   # List all sessions
 
-# Inside tmux (Ctrl+Space is prefix):
-Ctrl+Space then ?    # Show all keybindings
-Ctrl+Space then c    # Create new window
-Ctrl+Space then |    # Split pane vertically
-Ctrl+Space then -    # Split pane horizontally
-Ctrl+Space then h/j/k/l  # Navigate panes (vim keys)
-Ctrl+Space then H/J/K/L  # Resize panes
-Ctrl+Space then r    # Reload config
-Ctrl+Space then s    # Show sessions & windows
+# Inside tmux (Ctrl+b is prefix):
+Ctrl+b then ?    # Show all keybindings
+Ctrl+b then c    # Create new window
+Ctrl+b then |    # Split pane vertically
+Ctrl+b then -    # Split pane horizontally
+Ctrl+b then arrow keys  # Navigate panes
+Ctrl+b then r    # Reload config
+Ctrl+b then s    # Show sessions & windows
 
 # Saved sessions (auto-restore on tmux start):
 tmux kill-session -t work  # Kill session
@@ -259,7 +258,7 @@ gr                   # Go to references
 [d                   # Previous diagnostic
 
 # Insert mode:
-jk                   # Escape to normal mode
+ESC                  # Escape to normal mode (standard vim)
 Ctrl+N/P             # Next/previous autocomplete
 Ctrl+Y               # Accept autocomplete
 
@@ -524,7 +523,7 @@ git push              # Push to remote (your notes repo)
 tmux new -s dev
 
 # 3. Split panes in tmux
-Ctrl+Space |         # Vertical split for editor vs shell
+Ctrl+b |         # Vertical split for editor vs shell
 
 # 4. Open nvim in left pane
 nvim my-project/
@@ -541,16 +540,16 @@ Space gg             # Open lazygit
 # Stage, commit, push from TUI
 
 # 8. Check Kubernetes (mid-session)
-k9s                  # Open k9s TUI in new pane (Ctrl+Space c)
+k9s                  # Open k9s TUI in new pane (Ctrl+b c)
 # Check pods, check logs, etc
 
 # 9. Quick note during work
-Ctrl+Space 2         # New window in tmux
+Ctrl+b c         # New window in tmux
 nvim ~/notes/00-inbox/quick-thought.md
 # Write note, save, return to dev pane
 
 # 10. Exit session (autosaved)
-Ctrl+Space d         # Detach from tmux
+Ctrl+b d         # Detach from tmux
 # Next time: tmux attach -t dev
 ```
 
@@ -738,13 +737,13 @@ source ~/.zshrc
 # Edit ~/.tmux.conf (chezmoi-managed):
 vim ~/.tmux.conf
 
-# Change prefix if you want (currently Ctrl+Space):
-unbind C-Space
+# Change prefix if you want (currently Ctrl+b, the default):
+unbind C-b
 set -g prefix C-a
 bind C-a send-prefix
 
 # Save and reload:
-Ctrl+Space r
+Ctrl+b r
 ```
 
 #### Neovim — Add custom keybindings
@@ -893,7 +892,7 @@ tmux show -g | grep -i vim
 # Should show vim-tmux-navigator bindings
 
 # Reload tmux config
-Ctrl+Space r
+Ctrl+b r
 
 # Test: open nvim split, open tmux pane in different window
 # Use Ctrl+h/j/k/l to move between both
@@ -1169,10 +1168,10 @@ git push
 ### Tmux Shortcuts
 | Action | Keys |
 |--------|------|
-| Prefix | Ctrl+Space |
+| Prefix | Ctrl+b |
 | New pane (vertical) | Prefix then `\|` |
 | New pane (horizontal) | Prefix then `-` |
-| Navigate panes | Ctrl+h/j/k/l |
+| Navigate panes | Arrow keys (after Prefix) |
 | Resize panes | Prefix then Shift+hjkl |
 | New window | Prefix then `c` |
 | Kill pane | Prefix then `x` |
@@ -1225,7 +1224,7 @@ If something breaks:
 
 1. **Check logs**: `chezmoi status`, `:LspLog`, `kubectl logs`, `k9s`
 2. **Rebuild plugins**: `nvim "+Lazy! sync" +qa`, `tmux run-shell ~/.tmux/plugins/tpm/scripts/install_plugins.sh`
-3. **Reload config**: `source ~/.zshrc`, `Ctrl+Space r` (tmux), `:Lazy update` (nvim)
+3. **Reload config**: `source ~/.zshrc`, `Ctrl+b r` (tmux), `:Lazy update` (nvim)
 4. **Last resort**: Reinstall from dotfiles repo: `chezmoi apply --force`
 
 Happy coding! 🚀

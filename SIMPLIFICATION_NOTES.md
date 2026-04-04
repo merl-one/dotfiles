@@ -27,7 +27,7 @@ font:  System monospace fallback (works everywhere)
 ### Terminal (Alacritty)
 - Opens cleanly ✅
 - No font errors ✅
-- Uses system monospace (likely Arial or Consolas) - **this is fine**
+- Uses JetBrains Mono NL (installed in C:\WINDOWS\Fonts) ✅
 - Works on any machine ✅
 
 ### Zsh Shell
@@ -97,8 +97,8 @@ hjkl    # Navigation
 
 ### ✅ Font Error
 - **Error**: `font FontDesc not found` + `[?]` characters
-- **Fix**: Removed specific JetBrains Mono font, using system monospace
-- **Status**: Error gone, font renders as Arial/Consolas (acceptable)
+- **Fix**: Updated to JetBrains Mono NL (no ligatures variant)
+- **Status**: Error gone, renders cleanly with custom font
 
 ### ✅ Alacritty Config Error
 - **Error**: `builtin_box_drawing: invalid type: map, expected a boolean`
@@ -120,11 +120,12 @@ hjkl    # Navigation
 
 These remain because they're non-invasive and widely compatible:
 
-1. **Starship prompt** - Better prompt display (colors + git/k8s context)
-2. **Catppuccin theme** - Nice color scheme for tmux/vim
+1. **Starship prompt** - Better prompt display with Gruvbox Dark colors
+2. **Gruvbox Dark theme** - Nice, warm color scheme for terminal/tmux/nvim
 3. **Syntax highlighting** - zsh-syntax-highlighting plugin
-4. **Fzf fuzzy finder** - Installed and available
+4. **Fzf fuzzy finder** - Installed and available (standard tool)
 5. **Language LSPs** - Python, TypeScript, etc. auto-install on first use
+6. **JetBrains Mono NL font** - Installed on Windows for consistent appearance
 
 These don't interfere with standard workflows.
 
