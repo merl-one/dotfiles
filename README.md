@@ -43,12 +43,12 @@ nvim --headless "+Lazy! sync" +qa
 Alacritty config is located at: `C:\Users\%USERNAME%\AppData\Roaming\alacritty\alacritty.toml`
 
 The current configuration uses:
-- **Font**: `monospace` (universal fallback - works on all systems)
+- **Font**: JetBrains Mono Nerd Font (provides Nerd Font icons for `ls` output)
 - **WSL2**: Targets `Ubuntu-24.04` distribution
 - **Theme**: Gruvbox Dark (matches tmux, vim, and starship)
 - **Startup**: zsh automatically launches and starts in home directory (`~`)
 
-**Note**: Nerd Font variants (like `JetBrainsMonoNerdFont`) may not register properly on all Windows installations. Using generic `monospace` ensures reliable compatibility while maintaining a clean terminal experience.
+**Font Installation**: JetBrains Mono Nerd Font files must be installed to `C:\Windows\Fonts\` before Alacritty will render correctly. The font registers as `"JetBrains Mono"` in the system font registry.
 
 ## Structure
 
