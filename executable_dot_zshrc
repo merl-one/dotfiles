@@ -68,12 +68,14 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --tree --color=always $realpath
 # --- kubectl completion ---
 if command -v kubectl &>/dev/null; then
   source <(kubectl completion zsh)
-  complete -F __start_kubectl k
+  # In zsh, compdef is used for command completion aliases (different from bash 'complete')
+  compdef __start_kubectl k
 fi
 
 # --- AI shell assistant (fabric) ---
 # Usage: ?? what does eza do
-function ?? {
+# Note: Function name quoted to prevent glob expansion of ?
+'??' () {
   local query="$*"
   echo "$query" | fabric --pattern explain_code 2>/dev/null || echo "fabric not configured — run: fabric --setup"
 }
