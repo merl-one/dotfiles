@@ -1,0 +1,89 @@
+# --- zinit init ---
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
+if [ ! -d "$ZINIT_HOME" ]; then
+  mkdir -p "$(dirname $ZINIT_HOME)"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+source "${ZINIT_HOME}/zinit.zsh"
+
+# --- core plugins (load in this order) ---
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light Aloxaf/fzf-tab
+
+# --- starship prompt ---
+eval "$(starship init zsh)"
+
+# --- zoxide (smart cd) ---
+eval "$(zoxide init zsh)"
+
+# --- fzf keybindings + completion ---
+source <(fzf --zsh)
+
+# --- PATH ---
+export PATH="$HOME/.local/bin:$HOME/bin:$HOME/.opencode/bin:$PATH"
+
+# --- aliases ---
+alias ls='eza --icons'
+alias ll='eza -la --icons --git'
+alias lt='eza --tree --icons'
+alias cat='bat --paging=never'
+alias grep='rg'
+alias find='fd'
+alias cd='z'
+
+# --- git aliases ---
+alias g='git'
+alias gs='git status'
+alias gd='git diff'
+alias gl='git log --oneline --graph --decorate'
+alias gp='git push'
+alias gc='git commit'
+alias ga='git add'
+alias lg='lazygit'
+
+# --- homelab aliases ---
+alias k='kubectl'
+alias kns='kubectl config set-context --current --namespace'
+alias kctx='kubectl config use-context'
+alias kgp='kubectl get pods'
+alias kgn='kubectl get nodes'
+
+# --- history config ---
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_REDUCE_BLANKS
+
+# --- completion style ---
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --tree --color=always $realpath 2>/dev/null || ls $realpath'
+
+# --- kubectl completion ---
+if command -v kubectl &>/dev/null; then
+  source <(kubectl completion zsh)
+  complete -F __start_kubectl k
+fi
+
+# --- AI shell assistant (fabric) ---
+# Usage: ?? what does eza do
+function ?? {
+  local query="$*"
+  echo "$query" | fabric --pattern explain_code 2>/dev/null || echo "fabric not configured — run: fabric --setup"
+}
+
+# Usage: cat file.md | ai
+function ai {
+  local input
+  input=$(cat /dev/stdin 2>/dev/null || echo "$*")
+  echo "$input" | fabric --pattern summarize 2>/dev/null || echo "fabric not configured — run: fabric --setup"
+}
+
+# --- secrets (loaded from ~/.secrets, never committed) ---
+[ -f ~/.secrets/env ] && source ~/.secrets/env

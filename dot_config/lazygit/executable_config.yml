@@ -1,0 +1,35 @@
+gui:
+  theme:
+    activeBorderColor:
+      - "#89b4fa"
+      - bold
+    inactiveBorderColor:
+      - "#585b70"
+    overflowingFilesColor:
+      - "#f38ba8"
+    selectedLineBgColor:
+      - "#313244"
+    selectedRangeBgColor:
+      - "#313244"
+    cherryPickedCommitBgColor:
+      - "#45475a"
+    cherryPickedCommitFgColor:
+      - "#89b4fa"
+    unstagedChangesColor:
+      - "#f38ba8"
+    defaultFgColor:
+      - "#cdd6f4"
+    searchingActiveBorderColor:
+      - "#f9e2af"
+  nerdFontsVersion: "3"
+  showIcons: true
+
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+
+keybinding:
+  universal:
+    quit: q
+    quit-alt1: <c-c>

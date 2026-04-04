@@ -1,0 +1,12 @@
+k9s:
+  refreshRate: 2
+  ui:
+    skin: catppuccin-mocha
+    noIcons: false
+  logger:
+    tail: 200
+    buffer: 5000
+    sinceSeconds: -1
+    fullScreen: false
+    textWrap: false
+    showTime: false

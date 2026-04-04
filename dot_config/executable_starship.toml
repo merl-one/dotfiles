@@ -1,0 +1,88 @@
+# Starship config — homelab/DevOps workflow
+# Catppuccin Mocha inspired
+
+format = """
+[](fg:#89b4fa)\
+$os\
+$username\
+[](bg:#74c7ec fg:#89b4fa)\
+$directory\
+[](fg:#74c7ec bg:#313244)\
+$git_branch\
+$git_status\
+[](fg:#313244 bg:#1e1e2e)\
+$kubernetes\
+$python\
+$nodejs\
+$terraform\
+[](fg:#1e1e2e)\
+$line_break\
+$character"""
+
+[os]
+disabled = false
+style = "bg:#89b4fa fg:#1e1e2e"
+
+[os.symbols]
+Windows = "󰍲"
+Ubuntu = ""
+Linux = ""
+
+[username]
+show_always = true
+style_user = "bg:#89b4fa fg:#1e1e2e bold"
+style_root = "bg:#f38ba8 fg:#1e1e2e bold"
+format = '[$user ]($style)'
+disabled = false
+
+[directory]
+style = "fg:#1e1e2e bg:#74c7ec bold"
+format = "[ $path ]($style)"
+truncation_length = 4
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = " "
+style = "fg:#cdd6f4 bg:#313244"
+format = '[ $symbol$branch ]($style)'
+
+[git_status]
+style = "fg:#f38ba8 bg:#313244"
+format = '[$all_status$ahead_behind ]($style)'
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+modified = "!${count}"
+staged = "+${count}"
+untracked = "?${count}"
+
+[kubernetes]
+disabled = false
+style = "fg:#89dceb bg:#1e1e2e"
+format = '[ ⎈ $context\($namespace\) ]($style)'
+
+[python]
+symbol = " "
+style = "fg:#a6e3a1 bg:#1e1e2e"
+format = '[ $symbol($version)(\($virtualenv\)) ]($style)'
+
+[nodejs]
+symbol = " "
+style = "fg:#a6e3a1 bg:#1e1e2e"
+format = '[ $symbol($version) ]($style)'
+
+[terraform]
+format = "[ 󱁢 $workspace ]($style)"
+style = "fg:#cba6f7 bg:#1e1e2e"
+
+[character]
+success_symbol = "[❯](bold #a6e3a1)"
+error_symbol = "[❯](bold #f38ba8)"
+vimcmd_symbol = "[❮](bold #cba6f7)"
+
+[time]
+disabled = true
+
+[cmd_duration]
+min_time = 2000
+format = "[ $duration](fg:#f9e2af bg:#1e1e2e)"

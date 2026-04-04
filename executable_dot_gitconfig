@@ -1,0 +1,52 @@
+[user]
+	name = Jason
+	email = jason@jasonlabbe.ca
+
+[core]
+	pager = delta
+	editor = nvim
+	autocrlf = input
+
+[delta]
+	navigate = true
+	light = false
+	side-by-side = true
+	line-numbers = true
+	syntax-theme = Catppuccin-mocha
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default
+
+[interactive]
+	diffFilter = delta --color-only
+
+[alias]
+	st = status
+	co = checkout
+	br = branch
+	lg = log --oneline --graph --decorate --all
+	undo = reset HEAD~1 --mixed
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	whoami = "!git config user.name && git config user.email"
+
+[pull]
+	rebase = true
+
+[push]
+	autoSetupRemote = true
+
+[init]
+	defaultBranch = main
+
+[rebase]
+	autoStash = true
+
+[credential "https://github.com"]
+	helper = /mnt/c/Program Files/Git/mingw64/bin/git-credential-manager.exe
+
+[credential "https://gitlab.com"]
+	helper = /mnt/c/Program Files/Git/mingw64/bin/git-credential-manager.exe
