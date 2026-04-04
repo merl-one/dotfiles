@@ -39,3 +39,6 @@ alias la='ls -la'
 alias ll='ls -l'
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
+
+# Start in home directory (fixes System32 startup issue)
+cd ~ 2>/dev/null || cd "$HOME"
