@@ -1,27 +1,14 @@
-# Starship config — homelab/DevOps workflow
-# Gruvbox Dark theme
+# Starship config — Gruvbox Dark theme
+# Simplified for reliability
 
 format = """
-[](fg:#458588)\
-$os\
-$username\
-[](bg:#689d6a fg:#458588)\
-$directory\
-[](fg:#689d6a bg:#1d2021)\
-$git_branch\
-$git_status\
-[](fg:#1d2021 bg:#282828)\
-$kubernetes\
-$python\
-$nodejs\
-$terraform\
-[](fg:#282828)\
-$line_break\
-$character"""
+[┌───────────────](bold #458588)
+[│](bold #458588) $username@$hostname in $directory$git_branch$git_status
+[└─>](bold #458588) $character """
 
 [os]
 disabled = false
-style = "bg:#458588 fg:#282828 bold"
+format = "[$symbol ](bold #458588)"
 
 [os.symbols]
 Windows = "󰍲"
@@ -30,25 +17,29 @@ Linux = ""
 
 [username]
 show_always = true
-style_user = "bg:#458588 fg:#282828 bold"
-style_root = "bg:#fb4934 fg:#282828 bold"
-format = '[$user ]($style)'
-disabled = false
+format = "[$user]($style)"
+style_user = "bold #ebdbb2"
+style_root = "bold #fb4934"
+
+[hostname]
+ssh_only = false
+format = "[$hostname]($style)"
+style = "bold #689d6a"
 
 [directory]
-style = "fg:#282828 bg:#689d6a bold"
-format = "[ $path ]($style)"
-truncation_length = 4
+truncation_length = 3
 truncation_symbol = "…/"
+format = "[$path]($style)"
+style = "bold #fabd2f"
 
 [git_branch]
 symbol = " "
-style = "fg:#ebdbb2 bg:#1d2021"
-format = '[ $symbol$branch ]($style)'
+format = " [$symbol$branch]($style)"
+style = "bold #689d6a"
 
 [git_status]
-style = "fg:#fb4934 bg:#1d2021"
-format = '[$all_status$ahead_behind ]($style)'
+format = "([\\[$all_status$ahead_behind\\]]($style) )"
+style = "bold #fb4934"
 ahead = "⇡${count}"
 behind = "⇣${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
@@ -58,22 +49,24 @@ untracked = "?${count}"
 
 [kubernetes]
 disabled = false
-style = "fg:#689d6a bg:#282828"
-format = '[ ⎈ $context\($namespace\) ]($style)'
+format = " [$symbol ($context)]($style)"
+symbol = "⎈"
+style = "bold #689d6a"
 
 [python]
 symbol = " "
-style = "fg:#b8bb26 bg:#282828"
-format = '[ $symbol($version)(\($virtualenv\)) ]($style)'
+format = "[$symbol($version)]($style) "
+style = "bold #b8bb26"
 
 [nodejs]
 symbol = " "
-style = "fg:#b8bb26 bg:#282828"
-format = '[ $symbol($version) ]($style)'
+format = "[$symbol($version)]($style) "
+style = "bold #b8bb26"
 
 [terraform]
-format = "[ 󱁢 $workspace ]($style)"
-style = "fg:#d3869b bg:#282828"
+symbol = "󱁢 "
+format = "[$symbol($workspace)]($style) "
+style = "bold #d3869b"
 
 [character]
 success_symbol = "[❯](bold #b8bb26)"
@@ -85,4 +78,4 @@ disabled = true
 
 [cmd_duration]
 min_time = 2000
-format = "[ $duration](fg:#fabd2f bg:#282828)"
+format = "[ $duration](fg:#fabd2f)"
