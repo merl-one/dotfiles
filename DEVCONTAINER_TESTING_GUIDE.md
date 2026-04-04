@@ -348,14 +348,147 @@ poetry install -vv  # Verbose output to see what fails
 3. Bootstrap script successfully initializes new projects
 4. Documentation has been updated with dev container section
 
+## Testing Procedure (Alternative): DevPod CLI
+
+**DevPod is the simpler, recommended approach.** Use this instead of the VS Code GUI for faster setup.
+
+### Prerequisites for DevPod Testing
+
+- **DevPod**: Installed (https://devpod.sh/)
+- **Docker or Podman**: Running and available
+- **Projects**: Same as VS Code testing above
+
+### Installation
+
+```bash
+# macOS/Linux
+curl -sSL https://devpod.sh/install.sh | sh
+
+# Windows (PowerShell)
+iwr https://devpod.sh/install.ps1 | iex
+```
+
+### Test 1: RAG System with DevPod
+
+```bash
+# Navigate to project
+cd ~/Documents/GitLab/ai-infra-workflow/rag-system
+
+# Start container with DevPod
+devpod up .
+
+# DevPod will:
+# 1. Auto-detect .devcontainer/devcontainer.json
+# 2. Build image if not cached
+# 3. Start container
+# 4. Mount project directory
+# 5. Run postCreateCommand
+# 6. Drop into container shell
+```
+
+#### Verify Inside Container
+
+```bash
+# Same validations as VS Code approach:
+python --version
+poetry --version
+python -c "import torch; print(torch.__version__)"
+
+# Check dotfiles applied
+ls -la ~/.dotfiles
+which lg  # Should find lazygit alias
+
+# Test aliases
+lg        # Opens lazygit
+ls        # Shows eza with icons
+v         # Opens nvim
+```
+
+### Test 2: Infrastructure Container with DevPod
+
+```bash
+cd ~/homelab-iac
+devpod up .
+
+# Inside container:
+terraform --version
+ansible --version
+kubectl version
+which k   # kubectl alias
+```
+
+### Test 3: Python Template with DevPod
+
+```bash
+# Create test project
+mkdir /tmp/test-python && cd /tmp/test-python
+git init
+
+# Copy template
+mkdir -p .devcontainer
+cp ~/dotfiles/templates/python/* .devcontainer/
+
+# Start with DevPod
+devpod up .
+
+# Verify
+python --version
+poetry --version
+ls   # aliases work
+```
+
+### Common DevPod Troubleshooting
+
+**"devpod: command not found"**
+- Ensure it's installed and in PATH
+- Try full path: `~/.local/bin/devpod` (Linux) or check Program Files (Windows)
+
+**"Container exits immediately"**
+```bash
+# Check logs
+devpod logs .
+devpod logs . --follow  # Real-time logs
+```
+
+**"Dotfiles not applied"**
+```bash
+# Inside container, verify chezmoi ran:
+cat ~/.zshrc | grep -c "alias lg"  # Should show non-zero
+which chezmoi
+chezmoi status
+```
+
+**"Ports not forwarding"**
+```bash
+# Verify port config in devcontainer.json:
+cat .devcontainer/devcontainer.json | grep -A5 "forwardPorts"
+
+# Inside container, check if service listening:
+lsof -i :8000
+```
+
+### DevPod vs VS Code Comparison
+
+| Task | DevPod | VS Code |
+|------|--------|---------|
+| **Startup** | `devpod up .` | F1 → search → click → wait |
+| **Speed** | Faster (direct CLI) | Slower (GUI overhead) |
+| **Headless Support** | ✅ Yes (CI/CD) | ❌ No (GUI only) |
+| **Learning** | Minimal | Moderate (menus) |
+| **Flexibility** | Multiple backends | Docker/Podman only |
+
+**Recommendation**: Use DevPod for new development and testing. Use VS Code extension as backup if GUI preferred.
+
 ## Next Steps
 
-After completing Phase 6 testing:
+After completing Phase 6-7 testing:
 
-1. **Phase 7a**: Create initialization guide for new projects
-2. **Phase 7b**: Update main dotfiles README with dev container section
-3. **Phase 7c**: Commit all configurations to git with proper message
-4. **Phase 7d**: (Optional) Implement advanced features:
+1. **Phase 8a**: Validate DevPod works with all 5 containers
+2. **Phase 8b**: Document DevPod as primary workflow
+3. **Phase 8c**: Create DEVPOD_WORKFLOW.md guide (DONE)
+4. **Phase 8d**: Update main README with DevPod quickstart (DONE)
+5. **Phase 8e**: Commit final changes
+6. **Phase 8f**: (Optional) Implement advanced features:
    - Multi-container setup with docker-compose
    - GPU support (if applicable)
    - Custom volume mounts

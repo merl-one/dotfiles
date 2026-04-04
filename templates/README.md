@@ -14,44 +14,43 @@ Dev containers allow you to develop inside a Docker container with all dependenc
 
 ## 🚀 Quick Start
 
-### 1. Copy a Template
+### Option A: DevPod CLI (Recommended - Fastest)
 
 ```bash
-# For a Python project
-cp -r templates/python your-project/.devcontainer
+# 1. Install DevPod (one-time)
+curl -sSL https://devpod.sh/install.sh | sh
 
-# For Node/TypeScript
-cp -r templates/node your-project/.devcontainer
-
-# For Infrastructure (Terraform/Ansible)
-cp -r templates/terraform your-project/.devcontainer
-```
-
-### 2. Open in VS Code
-
-```bash
+# 2. Copy a template to your project
 cd your-project
-devcontainer open .
+cp -r ../dotfiles/templates/python .devcontainer
+
+# 3. Start the container
+devpod up .
+
+# Inside container, everything is ready:
+python --version
+ls        # aliases work
+lg        # lazygit opens
 ```
 
-VS Code will:
-- Detect the `.devcontainer/` configuration
-- Build the Docker image
-- Start the container
-- Mount your project
-- Run post-create setup
-- Connect you to the container
-
-### 3. Start Coding
-
-Inside the container, all tools and aliases are ready:
+### Option B: VS Code Dev Containers Extension (GUI)
 
 ```bash
-ls                    # Uses eza with icons
-lg                    # Opens lazygit
-k get pods           # kubectl shortcut
-v main.py            # Opens nvim
+# 1. Install extension in VS Code
+# F1 → "Extensions: Install Extensions" → search "Dev Containers" → Install
+
+# 2. Copy a template to your project
+cd your-project
+cp -r ../dotfiles/templates/python .devcontainer
+
+# 3. Open in VS Code
+code .
+
+# 4. F1 → "Dev Containers: Reopen in Container"
+# VS Code will build and start the container
 ```
+
+**DevPod is faster and simpler.** Use VS Code extension as backup if you prefer GUI.
 
 ## 📦 Available Templates
 
