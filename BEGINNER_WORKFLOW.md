@@ -477,16 +477,16 @@ sudo apt update && sudo apt install neovim
 ### Issue: Colors look wrong
 
 ```bash
-# Problem: Terminal doesn't match expected Catppuccin theme
+# Problem: Terminal doesn't match expected Gruvbox Dark theme
 # Reason: Terminal (Alacritty) and shell (zsh) need separate config
 
 # Fix:
 # 1. Alacritty config (Windows side):
-cat %APPDATA%\alacritty\alacritty.toml | grep colors
+cat %APPDATA%\alacritty\alacritty.toml | grep -A 30 "Gruvbox"
 
-# 2. Should have [colors.primary], [colors.normal], etc.
+# 2. Should have Gruvbox Dark colors: backgrounds (#282828), foreground (#ebdbb2)
 
-# 3. Zsh gets colors from Starship prompt (same config)
+# 3. Zsh gets colors from Starship prompt (same Gruvbox config)
 
 # If still wrong, check if you're in the right terminal
 ```
@@ -531,11 +531,13 @@ git config --global credential.helper manager-core
 # Reason: JetBrains Mono Nerd Font not installed on Windows
 
 # Fix:
-# Already done in Task 1! But if you need to reinstall:
-# Download: https://github.com/ryanoasis/nerd-fonts/releases
-# Find: JetBrainsMono.zip
-# Extract, install all .ttf files
-# Restart Alacritty
+# Font is already installed in: C:\Users\jason\AppData\Local\Microsoft\Windows\Fonts
+# Alacritty config already references "JetBrainsMono Nerd Font"
+# Restart Alacritty to see the font take effect
+
+# If still seeing issues:
+# 1. Verify font is installed: Settings > Fonts > "JetBrainsMono Nerd Font"
+# 2. Check Alacritty logs: C:\Users\jason\AppData\Local\Temp\Alacritty-*.log
 ```
 
 ---

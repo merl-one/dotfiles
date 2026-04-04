@@ -31,6 +31,9 @@ set -o vi                          # Vi-like editing (ESC for normal mode)
 export EDITOR=vi                   # Default editor
 export PAGER=less                  # Default pager
 
+# Initialize starship prompt
+eval "$(starship init zsh)"
+
 # Basic aliases (few, essential only)
 alias la='ls -la'
 alias ll='ls -l'

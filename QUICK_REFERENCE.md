@@ -1,5 +1,16 @@
 # Quick Reference: Your Setup Now
 
+## Terminal Theme & Font
+
+**Font**: JetBrains Mono Nerd Font (Regular, 13pt)
+- Clean monospace rendering with icon support
+- Installed in Windows Fonts directory
+
+**Theme**: Gruvbox Dark
+- Warm, easy-on-the-eyes dark color scheme
+- Applied to: Terminal (Alacritty), Prompt (Starship), Tmux
+- Gruvbox palette: warm browns, greens, yellows, and blues
+
 ## Standard Keybinds Cheatsheet
 
 ### Tmux (Terminal Multiplexer)

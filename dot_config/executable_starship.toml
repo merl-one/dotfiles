@@ -1,27 +1,27 @@
 # Starship config — homelab/DevOps workflow
-# Catppuccin Mocha inspired
+# Gruvbox Dark theme
 
 format = """
-[](fg:#89b4fa)\
+[](fg:#458588)\
 $os\
 $username\
-[](bg:#74c7ec fg:#89b4fa)\
+[](bg:#689d6a fg:#458588)\
 $directory\
-[](fg:#74c7ec bg:#313244)\
+[](fg:#689d6a bg:#1d2021)\
 $git_branch\
 $git_status\
-[](fg:#313244 bg:#1e1e2e)\
+[](fg:#1d2021 bg:#282828)\
 $kubernetes\
 $python\
 $nodejs\
 $terraform\
-[](fg:#1e1e2e)\
+[](fg:#282828)\
 $line_break\
 $character"""
 
 [os]
 disabled = false
-style = "bg:#89b4fa fg:#1e1e2e"
+style = "bg:#458588 fg:#282828 bold"
 
 [os.symbols]
 Windows = "󰍲"
@@ -30,24 +30,24 @@ Linux = ""
 
 [username]
 show_always = true
-style_user = "bg:#89b4fa fg:#1e1e2e bold"
-style_root = "bg:#f38ba8 fg:#1e1e2e bold"
+style_user = "bg:#458588 fg:#282828 bold"
+style_root = "bg:#fb4934 fg:#282828 bold"
 format = '[$user ]($style)'
 disabled = false
 
 [directory]
-style = "fg:#1e1e2e bg:#74c7ec bold"
+style = "fg:#282828 bg:#689d6a bold"
 format = "[ $path ]($style)"
 truncation_length = 4
 truncation_symbol = "…/"
 
 [git_branch]
 symbol = " "
-style = "fg:#cdd6f4 bg:#313244"
+style = "fg:#ebdbb2 bg:#1d2021"
 format = '[ $symbol$branch ]($style)'
 
 [git_status]
-style = "fg:#f38ba8 bg:#313244"
+style = "fg:#fb4934 bg:#1d2021"
 format = '[$all_status$ahead_behind ]($style)'
 ahead = "⇡${count}"
 behind = "⇣${count}"
@@ -58,31 +58,31 @@ untracked = "?${count}"
 
 [kubernetes]
 disabled = false
-style = "fg:#89dceb bg:#1e1e2e"
+style = "fg:#689d6a bg:#282828"
 format = '[ ⎈ $context\($namespace\) ]($style)'
 
 [python]
 symbol = " "
-style = "fg:#a6e3a1 bg:#1e1e2e"
+style = "fg:#b8bb26 bg:#282828"
 format = '[ $symbol($version)(\($virtualenv\)) ]($style)'
 
 [nodejs]
 symbol = " "
-style = "fg:#a6e3a1 bg:#1e1e2e"
+style = "fg:#b8bb26 bg:#282828"
 format = '[ $symbol($version) ]($style)'
 
 [terraform]
 format = "[ 󱁢 $workspace ]($style)"
-style = "fg:#cba6f7 bg:#1e1e2e"
+style = "fg:#d3869b bg:#282828"
 
 [character]
-success_symbol = "[❯](bold #a6e3a1)"
-error_symbol = "[❯](bold #f38ba8)"
-vimcmd_symbol = "[❮](bold #cba6f7)"
+success_symbol = "[❯](bold #b8bb26)"
+error_symbol = "[❯](bold #fb4934)"
+vimcmd_symbol = "[❮](bold #d3869b)"
 
 [time]
 disabled = true
 
 [cmd_duration]
 min_time = 2000
-format = "[ $duration](fg:#f9e2af bg:#1e1e2e)"
+format = "[ $duration](fg:#fabd2f bg:#282828)"

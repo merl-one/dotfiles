@@ -20,7 +20,7 @@ Complete bootstrap and usage guide for WSL2 Linux development environment manage
 
 1. **Open Alacritty** (Windows)
    - You'll automatically land in WSL2 Ubuntu-24.04
-   - Should see the Starship prompt (neon blue/pink on black background)
+   - Should see the Starship prompt (warm colors on dark background with Gruvbox Dark theme)
 
 2. **Verify everything works**
    ```bash
@@ -43,14 +43,14 @@ Complete bootstrap and usage guide for WSL2 Linux development environment manage
 
 | Action | Keys |
 |--------|------|
-| **Tmux prefix** | `Ctrl+Space` |
-| **Vim escape** | `jk` (in insert mode) |
+| **Tmux prefix** | `Ctrl+b` (standard tmux default) |
+| **Vim escape** | `ESC` (standard vim) |
 | **LazyVim leader** | `Space` |
 | **Fzf find files** | `Ctrl+P` (in zsh) |
 | **Fzf find history** | `Ctrl+R` (in zsh) |
 | **AI explain command** | `?? your question` |
-| **Tmux new pane** | `Ctrl+Space` then `|` (vertical) or `-` (horizontal) |
-| **Navigate tmux/nvim** | `Ctrl+h/j/k/l` (moves between tmux panes AND nvim splits) |
+| **Tmux new pane** | `Ctrl+b` then `%` (vertical) or `"` (horizontal) |
+| **Navigate tmux panes** | `Ctrl+b` then arrow keys |
 
 ---
 
@@ -71,7 +71,7 @@ Complete bootstrap and usage guide for WSL2 Linux development environment manage
 │   │   │   ├── obsidian.lua     # Notes editing
 │   │   │   └── tmux.lua         # Pane navigation
 │   │   └── lazy-lock.json       # Plugin versions (auto-updated)
-│   ├── starship.toml            # Prompt config (Catppuccin Mocha)
+│   ├── starship.toml            # Prompt config (Gruvbox Dark theme)
 │   ├── lazygit/config.yml       # Git TUI config
 │   ├── k9s/config.yaml          # Kubernetes TUI config
 │   └── .ssh/                    # SSH keys (persistent)
@@ -87,11 +87,7 @@ Complete bootstrap and usage guide for WSL2 Linux development environment manage
 │       ├── lazy/                # LazyVim plugins (38 total)
 │       └── mason/packages/      # Language servers
 ├── .tmux/
-│   ├── plugins/tpm/             # Tmux Plugin Manager
-│   ├── plugins/tmux-sensible/
-│   ├── plugins/tmux-resurrect/  # Save/restore sessions
-│   ├── plugins/tmux-continuum/  # Auto-save
-│   └── plugins/catppuccin/tmux/ # Theme
+│   └── plugins/tpm/             # Tmux Plugin Manager
 ├── .local/share/zinit/          # Zsh plugin manager
 ├── notes/                       # Zettelkasten vault (separate git repo)
 │   ├── 00-inbox/                # Daily capture
@@ -137,8 +133,8 @@ chezmoi source directory
 |------|---------|---------|
 | **zsh** | Shell | 5.x |
 | **zinit** | Zsh plugin manager | latest |
-| **Starship** | Prompt (Catppuccin Mocha) | latest |
-| **tmux** | Terminal multiplexer (Ctrl+Space prefix) | 3.x |
+| **Starship** | Prompt (Gruvbox Dark) | latest |
+| **tmux** | Terminal multiplexer (Ctrl+b default prefix) | 3.x |
 | **Neovim** | Editor | 0.12.0 |
 | **LazyVim** | Neovim config framework | v12.x |
 | **kubectl** | Kubernetes CLI | 1.35.3 |
@@ -176,7 +172,7 @@ Ctrl+P               # Fuzzy find files (fzf)
 Tab                  # Smart autocomplete (fzf-tab)
 ```
 
-#### **Starship** — Prompt (Catppuccin Mocha theme)
+#### **Starship** — Prompt (Gruvbox Dark theme)
 Shows:
 - Current directory (truncated)
 - Git branch & status (dirty indicator)
@@ -234,9 +230,7 @@ tmux kill-session -t work  # Kill session
 
 **Plugins active:**
 - `tmux-sensible` — Sensible defaults
-- `tmux-resurrect` — Save/restore pane layouts
-- `tmux-continuum` — Auto-save every 15 min
-- `catppuccin/tmux` — Mocha theme
+- Manual Gruvbox Dark theme (no theme plugin)
 
 ---
 
