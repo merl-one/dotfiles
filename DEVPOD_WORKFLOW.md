@@ -281,10 +281,53 @@ devpod up . --cmd bash
    ```
 
 5. **Test on CI/CD with DevPod**
+    ```bash
+    # Your CI/CD can also use DevPod for reproducible testing
+    # Install DevPod in CI image, then use same devpod up . command
+    ```
+
+## SSH & Git Authentication (Windows + WSL)
+
+If you're using **Windows + WSL with lazygit**, you may need to set up SSH key access:
+
+### One-time Setup (WSL)
+
+1. **Create SSH symlink** (links WSL to Windows SSH keys):
    ```bash
-   # Your CI/CD can also use DevPod for reproducible testing
-   # Install DevPod in CI image, then use same devpod up . command
+   # In WSL terminal
+   rm -rf ~/.ssh
+   ln -s /mnt/c/Users/username/.ssh ~/.ssh
    ```
+
+2. **Verify SSH access**:
+   ```bash
+   ssh -T git@gitlab.com      # For GitLab
+   # or
+   ssh -T git@github.com      # For GitHub
+   ```
+
+3. **Inside containers**: SSH keys are automatically available because:
+   - Containers mount your `~/.ssh` directory (via devcontainer.json)
+   - Your projects are git cloned, so lazygit can use SSH
+   - The dotfiles (`lg` alias) pulls from git via SSH
+
+### How It Works
+
+```
+Windows SSH Keys (~/.ssh/id_ed25519)
+    ↓
+WSL symlink (~/.ssh → /mnt/c/Users/username/.ssh)
+    ↓
+Container mount (volume: ~/.ssh)
+    ↓
+lazygit inside container (uses SSH automatically)
+```
+
+### Troubleshooting
+
+- **"Permission denied (publickey)" in lazygit**: Verify SSH works in WSL first (`ssh -T git@gitlab.com`)
+- **SSH key not found**: Check the symlink: `ls -l ~/.ssh/id_ed25519`
+- **Too open permissions error**: SSH permissions are strict on Windows files; use `ssh-add` to cache the key
 
 ## Advanced: Custom DevPod Workspace
 
