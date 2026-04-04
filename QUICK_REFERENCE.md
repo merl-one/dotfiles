@@ -3,12 +3,14 @@
 ## Terminal Theme & Font
 
 **Font**: JetBrains Mono Nerd Font (Regular, 13pt)
-- Clean monospace rendering with icon support
-- Installed in Windows Fonts directory
+- Monospace rendering with **full icon support** (folder icons, file types, git symbols, etc.)
+- Contains 96 font variants (Regular, Bold, Italic, Light, ExtraBold, etc.)
+- Installed in Windows Fonts directory (C:\Windows\Fonts)
+- When you type `ls`, you'll see folder icons, file type symbols, and more!
 
 **Theme**: Gruvbox Dark
 - Warm, easy-on-the-eyes dark color scheme
-- Applied to: Terminal (Alacritty), Prompt (Starship), Tmux
+- Applied to: Terminal (Alacritty), Prompt (Starship), Tmux, Neovim
 - Gruvbox palette: warm browns, greens, yellows, and blues
 
 ## Standard Keybinds Cheatsheet

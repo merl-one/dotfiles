@@ -27,8 +27,8 @@ font:  System monospace fallback (works everywhere)
 ### Terminal (Alacritty)
 - Opens cleanly ✅
 - No font errors ✅
-- Uses JetBrains Mono NL (installed in C:\WINDOWS\Fonts) ✅
-- Works on any machine ✅
+- Uses JetBrains Mono Nerd Font (96 variants with full icon support) ✅
+- Shows folder icons, file type symbols, git icons when using `ls`, prompts, etc. ✅
 
 ### Zsh Shell
 - Initializes without errors ✅
@@ -97,8 +97,8 @@ hjkl    # Navigation
 
 ### ✅ Font Error
 - **Error**: `font FontDesc not found` + `[?]` characters
-- **Fix**: Updated to JetBrains Mono NL (no ligatures variant)
-- **Status**: Error gone, renders cleanly with custom font
+- **Fix**: Installed full JetBrains Mono Nerd Font (96 variants with Nerd icons)
+- **Status**: Error gone, renders cleanly with icons for folders, git, and file types
 
 ### ✅ Alacritty Config Error
 - **Error**: `builtin_box_drawing: invalid type: map, expected a boolean`
@@ -125,7 +125,7 @@ These remain because they're non-invasive and widely compatible:
 3. **Syntax highlighting** - zsh-syntax-highlighting plugin
 4. **Fzf fuzzy finder** - Installed and available (standard tool)
 5. **Language LSPs** - Python, TypeScript, etc. auto-install on first use
-6. **JetBrains Mono NL font** - Installed on Windows for consistent appearance
+6. **JetBrains Mono Nerd Font** - Full Nerd Font (96 variants) with icons and symbols for enhanced `ls` output, git status, file types, etc.
 
 These don't interfere with standard workflows.
 
