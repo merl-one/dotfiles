@@ -1,58 +1,7 @@
-# --- zinit init ---
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+# --- zsh: Minimal, portable configuration ---
+# Using defaults for maximum compatibility
 
-if [ ! -d "$ZINIT_HOME" ]; then
-  mkdir -p "$(dirname $ZINIT_HOME)"
-  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-fi
-
-source "${ZINIT_HOME}/zinit.zsh"
-
-# --- core plugins (load in this order) ---
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light Aloxaf/fzf-tab
-
-# --- starship prompt ---
-eval "$(starship init zsh)"
-
-# --- zoxide (smart cd) ---
-eval "$(zoxide init zsh)"
-
-# --- fzf keybindings + completion ---
-source <(fzf --zsh)
-
-# --- PATH ---
-export PATH="$HOME/.local/bin:$HOME/bin:$HOME/.opencode/bin:$PATH"
-
-# --- aliases ---
-alias ls='eza --icons'
-alias ll='eza -la --icons --git'
-alias lt='eza --tree --icons'
-alias cat='bat --paging=never'
-alias grep='rg'
-alias find='fd'
-alias cd='z'
-
-# --- git aliases ---
-alias g='git'
-alias gs='git status'
-alias gd='git diff'
-alias gl='git log --oneline --graph --decorate'
-alias gp='git push'
-alias gc='git commit'
-alias ga='git add'
-alias lg='lazygit'
-
-# --- homelab aliases ---
-alias k='kubectl'
-alias kns='kubectl config set-context --current --namespace'
-alias kctx='kubectl config use-context'
-alias kgp='kubectl get pods'
-alias kgn='kubectl get nodes'
-
-# --- history config ---
+# Basic initialization
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
@@ -60,32 +9,30 @@ setopt SHARE_HISTORY
 setopt HIST_IGNORE_DUPS
 setopt HIST_REDUCE_BLANKS
 
-# --- completion style ---
+# Standard completion (zsh built-in)
+autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --tree --color=always $realpath 2>/dev/null || ls $realpath'
 
-# --- kubectl completion ---
+# Kubectl completion
 if command -v kubectl &>/dev/null; then
   source <(kubectl completion zsh)
-  # In zsh, compdef is used for command completion aliases (different from bash 'complete')
   compdef __start_kubectl k
 fi
 
-# --- AI shell assistant (fabric) ---
-# Usage: ?? what does eza do
-# Note: Function name quoted to prevent glob expansion of ?
-'??' () {
-  local query="$*"
-  echo "$query" | fabric --pattern explain_code 2>/dev/null || echo "fabric not configured — run: fabric --setup"
-}
+# git completion (built-in to zsh)
+autoload -Uz bashcompinit && bashcompinit
+complete -o default -o nospace -F __git_wrap__git_main git
 
-# Usage: cat file.md | ai
-function ai {
-  local input
-  input=$(cat /dev/stdin 2>/dev/null || echo "$*")
-  echo "$input" | fabric --pattern summarize 2>/dev/null || echo "fabric not configured — run: fabric --setup"
-}
+# Add local bin to PATH
+export PATH="$HOME/.local/bin:$PATH"
 
-# --- secrets (loaded from ~/.secrets, never committed) ---
-[ -f ~/.secrets/env ] && source ~/.secrets/env
+# Standard shell settings
+set -o vi                          # Vi-like editing (ESC for normal mode)
+export EDITOR=vi                   # Default editor
+export PAGER=less                  # Default pager
+
+# Basic aliases (few, essential only)
+alias la='ls -la'
+alias ll='ls -l'
+alias grep='grep --color=auto'
+alias diff='diff --color=auto'
