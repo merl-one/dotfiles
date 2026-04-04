@@ -1,0 +1,46 @@
+{
+  "name": "Node.js 20 (TypeScript)",
+  "image": "node:20-alpine",
+  "remoteUser": "root",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [3000, 8000],
+  "portsAttributes": {
+    "3000": {
+      "label": "Application",
+      "onAutoForward": "notify"
+    },
+    "8000": {
+      "label": "API Server",
+      "onAutoForward": "notify"
+    }
+  },
+  "containerEnv": {
+    "NODE_ENV": "development",
+    "NODE_OPTIONS": "--enable-source-maps"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-typescript-next"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "eslint.validate": ["javascript", "typescript"],
+        "typescript.enablePromptUseWorkspaceTsdk": true
+      }
+    }
+  },
+  "postCreateCommand": "sh .devcontainer/postCreateCommand.sh",
+  "postStartCommand": "zsh -i -c 'echo Dev container started' 2>/dev/null || echo 'Welcome'",
+  "shutdownAction": "stopContainer",
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "1gb"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "Terraform & Ansible",
+  "image": "ubuntu:24.04",
+  "remoteUser": "root",
+  "workspaceFolder": "/workspace",
+  "containerEnv": {
+    "DEBIAN_FRONTEND": "noninteractive",
+    "TF_IN_AUTOMATION": "true",
+    "ANSIBLE_FORCE_COLOR": "1"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "HashiCorp.terraform",
+        "redhat.ansible",
+        "ms-vscode.makefile-tools"
+      ]
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/postCreateCommand.sh",
+  "postStartCommand": "zsh -i -c 'terraform --version'",
+  "shutdownAction": "stopContainer",
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "2gb"
+  }
+}

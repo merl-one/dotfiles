@@ -50,6 +50,59 @@ The current configuration uses:
 
 **Font Installation**: JetBrains Mono Nerd Font files must be installed to `C:\Windows\Fonts\` before Alacritty will render correctly. The font registers as `"JetBrains Mono"` in the system font registry.
 
+## Dev Containers (Project-Specific Environments)
+
+This repo includes **Dev Container templates** for isolated, reproducible project development environments. Each template includes:
+- Pre-configured Dockerfile with language-specific tools
+- VS Code integration (language extensions, debugging, testing)
+- Automatic dotfiles sourcing (aliases, vim config, tmux setup)
+- Port forwarding configuration
+- Health checks and lifecycle hooks
+
+### Quick Start: New Project with Dev Container
+
+```bash
+# 1. Clone or create your project
+mkdir ~/my-project && cd ~/my-project
+
+# 2. Initialize dev container from template
+bash ~/dotfiles/scripts/devcontainer-init.sh . python
+# Available templates: python, node, terraform
+
+# 3. Open in VS Code
+code .
+
+# 4. Press F1 → "Dev Containers: Open Folder in Container"
+# VS Code will build the image and start the container
+
+# 5. Inside container, verify everything works
+python --version       # Python 3.11 (or Node 20 for Node template)
+ls                      # Should show icons (eza with Nerd Font)
+lg                      # lazygit alias works
+v                       # Opens nvim with your config
+k                       # kubectl alias works
+gs/gp/gm                # git shortcuts work
+```
+
+### Available Templates
+
+| Template | Use Case | Includes |
+|----------|----------|----------|
+| **python** | Python projects, FastAPI, ML | Python 3.11, Poetry, black, ruff, pytest |
+| **node** | TypeScript, Node.js, MCP servers | Node 20, npm, pnpm, TypeScript, ESLint |
+| **terraform** | Infrastructure-as-code, Ansible | Terraform, Ansible, kubectl, Helm, cloud CLIs |
+
+### Existing Project Containers
+
+- **RAG System**: `ai-infra-workflow/rag-system/.devcontainer/` (Python + ML)
+- **Infrastructure**: `homelab-iac/.devcontainer/` (Terraform + Ansible)
+
+### Documentation
+
+- **Setup & Configuration**: See `templates/DEVCONTAINERS_GUIDE.md` (400+ lines, comprehensive)
+- **Testing Instructions**: See `DEVCONTAINER_TESTING_GUIDE.md` (step-by-step validation)
+- **Project-Specific**: Each `.devcontainer/README.md` has project-specific workflows
+
 ## Structure
 
 ```
@@ -62,5 +115,16 @@ dotfiles/
 │   ├── nvim/                    # LazyVim config
 │   ├── lazygit/                 # lazygit config
 │   └── k9s/                     # k9s config
-└── README.md
+├── templates/                   # Dev container templates
+│   ├── python/                  # Python 3.11 template
+│   ├── node/                    # Node.js 20 template
+│   ├── terraform/               # Terraform/Ansible template
+│   ├── DEVCONTAINERS_GUIDE.md   # Comprehensive reference
+│   └── README.md                # Quick start
+├── scripts/
+│   └── devcontainer-init.sh     # Bootstrap script for new projects
+├── plans/active/
+│   └── dev-containers-setup.md  # Implementation plan
+├── DEVCONTAINER_TESTING_GUIDE.md # Testing & validation guide
+└── README.md                    # This file
 ```
