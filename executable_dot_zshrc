@@ -34,11 +34,22 @@ export PAGER=less                  # Default pager
 # Initialize starship prompt
 eval "$(starship init zsh)"
 
-# Basic aliases (few, essential only)
-alias la='ls -la'
-alias ll='ls -l'
+# Set home directory for WSL2 (before aliases)
+export HOME="/mnt/c/Users/jason/Documents"
+
+# Aliases - eza with icons, lazygit, and common shortcuts
+alias ls='eza -la --icons'
+alias la='eza -la --icons'
+alias ll='eza -l --icons'
+alias l='eza --icons'
+alias lg='lazygit'
+alias k='kubectl'
+alias v='nvim'
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
+alias gs='git status'
+alias gp='git pull'
+alias gm='git commit -m'
 
-# Start in home directory (fixes System32 startup issue)
-cd ~ 2>/dev/null || cd "$HOME"
+# Start in home directory
+cd "$HOME" 2>/dev/null
