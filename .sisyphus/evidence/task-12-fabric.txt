@@ -1,2 +1,0 @@
-fabric: 1.4.442
-binary: /home/jason/.local/bin/fabric
