@@ -47,6 +47,3 @@
 
 [credential "https://github.com"]
 	helper = /mnt/c/Program Files/Git/mingw64/bin/git-credential-manager.exe
-
-[credential "https://gitlab.com"]
-	helper = /mnt/c/Program Files/Git/mingw64/bin/git-credential-manager.exe
