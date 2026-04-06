@@ -7,6 +7,6 @@
     }
   },
   "plugin": [
-    "oh-my-openagent@latest"
+    "oh-my-opencode@latest"
   ]
 }
