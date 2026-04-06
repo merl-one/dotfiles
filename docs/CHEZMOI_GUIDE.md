@@ -151,11 +151,47 @@ When you run `chezmoi init --apply`:
 sh -c "$(curl -fsLS get.chezmoi.io)"
 ```
 
+### Problem: Nothing Happens After `chezmoi init --apply`
+
+**This is a common issue caused by pre-existing chezmoi configuration pointing to the wrong directory.**
+
+**Diagnosis**: Check if `~/.local/share/chezmoi/` is empty or doesn't have `.git/`
+```bash
+ls -la ~/.local/share/chezmoi/
+```
+
+If it's empty or missing `.git/`, the repository was never cloned.
+
+**Root Cause**: If you had a previous chezmoi configuration (e.g., `~/.config/chezmoi/chezmoi.toml`), it may have had `sourceDir` pointing to a local directory instead of allowing chezmoi to clone from GitHub.
+
+**Solution**: Reset chezmoi completely and re-initialize
+```bash
+# Clean slate
+rm -rf ~/.config/chezmoi ~/.local/share/chezmoi ~/.cache/chezmoi
+
+# Recreate directories
+mkdir -p ~/.local/share ~/.config
+
+# Now initialize properly (this will clone the GitHub repo)
+chezmoi init --apply merl-one/dotfiles
+
+# Verify it worked
+ls -la ~/.local/share/chezmoi/
+ls -la ~/.zshrc ~/.gitconfig
+chezmoi status
+```
+
+After reset, chezmoi will:
+1. Clone the repository to `~/.local/share/chezmoi/`
+2. Create a fresh config in `~/.config/chezmoi/chezmoi.toml`
+3. Apply all files to your home directory
+4. Run silently (this is expected!)
+
 ### Problem: Already initialized, want to re-apply
 
 **Solution**: Use `chezmoi apply` instead of `init --apply`
 ```bash
-chezmoi apply --force https://github.com/merl-one/dotfiles.git
+chezmoi apply --force
 ```
 
 Or update from repository:
