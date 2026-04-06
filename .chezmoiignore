@@ -1,2 +1,26 @@
+# Documentation and planning files
 README.md
-.sisyphus
+docs/
+plans/
+
+# Development artifacts
+.sisyphus/
+.ruff_cache/
+
+# Git and version control
+.git/
+.gitignore
+
+# IDE and OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Scripts and templates (copied manually, not symlinked)
+scripts/
+templates/
+bin/

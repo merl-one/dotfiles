@@ -2,6 +2,8 @@
 
 Managed by [chezmoi](https://www.chezmoi.io). Bootstraps a complete Linux CLI development environment on WSL2 or bare Linux.
 
+> 📖 **For detailed setup guides, see [docs/INDEX.md](./docs/INDEX.md)**
+
 ## Quick Bootstrap
 
 ```bash
