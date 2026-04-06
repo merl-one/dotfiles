@@ -9,7 +9,7 @@ Managed by [chezmoi](https://www.chezmoi.io). Bootstraps a complete Linux CLI de
 sh -c "$(curl -fsLS get.chezmoi.io)"
 
 # 2. Init and apply from this repo
-chezmoi init --apply https://gitlab.com/jason/dotfiles
+chezmoi init --apply https://github.com/merl-one/dotfiles.git
 ```
 
 ## What's Included
