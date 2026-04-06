@@ -34,9 +34,6 @@ export PAGER=less                  # Default pager
 # Initialize starship prompt
 eval "$(starship init zsh)"
 
-# Set home directory for WSL2 (before aliases)
-export HOME="/mnt/c/Users/jason/Documents"
-
 # Aliases - eza with icons, lazygit, and common shortcuts
 alias ls='eza -la --icons'
 alias la='eza -la --icons'
