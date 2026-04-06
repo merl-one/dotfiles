@@ -6,12 +6,27 @@ Managed by [chezmoi](https://www.chezmoi.io). Bootstraps a complete Linux CLI de
 
 ## Quick Bootstrap
 
+### Option A: One-liner with feedback (Recommended)
+```bash
+curl -fsLS https://raw.githubusercontent.com/merl-one/dotfiles/main/bin/install.sh | bash
+```
+
+### Option B: Manual steps
 ```bash
 # 1. Install chezmoi
 sh -c "$(curl -fsLS get.chezmoi.io)"
 
 # 2. Init and apply from this repo
+# Note: This runs silently (no output = successful)
 chezmoi init --apply https://github.com/merl-one/dotfiles.git
+
+# 3. Verify it worked
+ls -la ~/.zshrc ~/.gitconfig ~/.tmux.conf
+```
+
+### Option C: With verbose output
+```bash
+chezmoi init --apply -vv https://github.com/merl-one/dotfiles.git
 ```
 
 ## What's Included

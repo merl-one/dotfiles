@@ -5,6 +5,7 @@ This directory contains all documentation for the dotfiles repository.
 ## 📖 Main Guides
 
 - **[BEGINNER_WORKFLOW.md](./BEGINNER_WORKFLOW.md)** - Getting started with chezmoi and setting up your environment
+- **[CHEZMOI_GUIDE.md](./CHEZMOI_GUIDE.md)** - ⭐ **READ THIS FIRST** - Why `chezmoi init --apply` appears silent, troubleshooting, verification
 - **[DEVPOD_SETUP.md](./DEVPOD_SETUP.md)** - Setting up SSH, Git authentication, and dev containers with DevPod
 - **[QUICK_REFERENCE.md](./QUICK_REFERENCE.md)** - Quick reference for common commands and aliases
 - **[GUIDES.md](./GUIDES.md)** - Comprehensive usage guide and configuration details
