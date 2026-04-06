@@ -26,6 +26,12 @@ complete -o default -o nospace -F __git_wrap__git_main git
 # Add local bin to PATH
 export PATH="$HOME/.local/bin:$PATH"
 
+# Ensure downloads symlink exists (convenience access to Windows Downloads from WSL)
+# On WSL2, allows access via ~/downloads-link instead of /mnt/c/Users/jason/Downloads
+if [[ -d /mnt/c/Users/jason/Downloads ]] && [[ ! -L ~/.downloads-link ]]; then
+  ln -sf /mnt/c/Users/jason/Downloads "$HOME/downloads-link" 2>/dev/null
+fi
+
 # Standard shell settings
 set -o vi                          # Vi-like editing (ESC for normal mode)
 export EDITOR=vi                   # Default editor
