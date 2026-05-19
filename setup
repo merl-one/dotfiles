@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Description: Link dotifles to home directory
+
+mkdir -p ~/.config
+
+ln -sf ~/dotfiles/bashrc ~/.bashrc
+ln -sf ~/dotfiles/vimrc ~/.vimrc
+ln -sf ~/dotifiles/starship.toml ~/.config/starship.toml
+
+echo "Dotfiles linked!"
